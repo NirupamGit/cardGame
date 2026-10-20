@@ -55,6 +55,14 @@ public class GUI extends JFrame implements ActionListener, MouseListener, MouseM
 		gameArea.setBorder(BorderFactory.createMatteBorder(20, 20, 20, 20, Color.red));
 		this.add(gameArea);
 		
+		JPanel gameArea2 = new JPanel();
+		gameArea2.setOpaque(false);
+		gameArea2.setSize(new Dimension(400, 100));
+		gameArea2.setLayout(new FlowLayout());
+		gameArea2.setBounds(100, 480, 500, 80);
+		gameArea2.setBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.yellow));
+		this.add(gameArea2);
+		
     }
 
 
