@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
+import java.util.Stack;
 
 
 public class GUI extends JFrame implements ActionListener, MouseListener, MouseMotionListener{
@@ -47,22 +48,30 @@ public class GUI extends JFrame implements ActionListener, MouseListener, MouseM
 
         this.setVisible(true);
 
-		JPanel gameArea = new JPanel();
-		gameArea.setOpaque(false);
-		gameArea.setSize(new Dimension(500, 10));
-		gameArea.setLayout(new FlowLayout());
-		gameArea.setBounds(90, 10, 100,100);
-		gameArea.setBorder(BorderFactory.createMatteBorder(20, 20, 20, 20, Color.red));
-		this.add(gameArea);
-		
+		JPanel gameArea1 = new JPanel();
+		gameArea1.setOpaque(false);
+		gameArea1.setSize(new Dimension(500, 20));
+		gameArea1.setLayout(new FlowLayout());
+		gameArea1.setBounds(0, 0, 900, 190);
+		gameArea1.setBorder(BorderFactory.createMatteBorder(7,7,7,7, Color.red));
+		this.add(gameArea1);
+
 		JPanel gameArea2 = new JPanel();
 		gameArea2.setOpaque(false);
-		gameArea2.setSize(new Dimension(400, 100));
+		gameArea2.setSize(new Dimension(500, 20));
 		gameArea2.setLayout(new FlowLayout());
-		gameArea2.setBounds(100, 480, 500, 80);
-		gameArea2.setBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.yellow));
+		gameArea2.setBounds(0,190, 900, 160);
+		gameArea2.setBorder(BorderFactory.createMatteBorder(7, 7, 7, 7, Color.green));
 		this.add(gameArea2);
 		
+		JPanel gameArea3 = new JPanel();
+		gameArea3.setOpaque(false);
+		gameArea3.setSize(new Dimension(500, 20));
+		gameArea3.setLayout(new FlowLayout());
+		gameArea3.setBounds(0,350, 900, 190);
+		gameArea3.setBorder(BorderFactory.createMatteBorder(7, 7, 7, 7, Color.yellow));
+		this.add(gameArea3);
+
     }
 
 
