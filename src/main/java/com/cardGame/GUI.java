@@ -44,7 +44,7 @@ public class GUI extends JFrame implements ActionListener, MouseListener, MouseM
         */
         Card card = new Card(2, Card.Suit.Diamonds);
         System.out.println(card);
-        this.add(card);    
+        this.add(card); 
 
         this.setVisible(true);
 
@@ -74,6 +74,39 @@ public class GUI extends JFrame implements ActionListener, MouseListener, MouseM
 
     }
 
+   public JLayeredPane drawPile(Stack<Card> stackIn) {
+	   JFrame frame = new JFrame("fdskljjfdsalk");
+	   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	   frame.setSize(400,400);
+	   JLayeredPane result = new JLayeredPane();
+	   frame.add(result);
+	   Object cards[];
+	    cards = stackIn.toArray(); //please note we convert this stack to an array so that we can iterate through it backwards while drawing. You’ll need to cast each element inside cards to a <Card> in order to use the methods to adjust their position
+		for(int i=0; i<cards.length; i++) {
+			frame.add((Card)cards[i]);
+		}
+		 JPanel panel1 = createColoredPanel(Color.RED, 100, 100, 200, 200);
+	        JPanel panel2 = createColoredPanel(Color.GREEN, 150, 150, 200, 200);
+	        JPanel panel3 = createColoredPanel(Color.BLUE, 200, 200, 200, 200);
+
+	        // Add the panels to the layered pane with different layer values.
+	        // The layers determine the stacking order of the panels.
+	        frame.add(panel1, JLayeredPane.DEFAULT_LAYER);
+	        frame.add(panel2, JLayeredPane.PALETTE_LAYER);
+	        frame.add(panel3, JLayeredPane.MODAL_LAYER);
+
+		frame.setVisible(true);
+	    return result;
+
+	}
+
+	private JPanel createColoredPanel(Color color, int x, int y, int width, int height) {
+		// Create a colored JPanel with specified color and position.
+        JPanel panel = new JPanel();
+        panel.setBackground(color);
+        panel.setBounds(x, y, width, height);
+        return panel;
+}
 
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
