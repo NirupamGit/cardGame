@@ -46,21 +46,22 @@ public class GUI extends JFrame implements ActionListener, MouseListener, MouseM
         System.out.println(card);
         this.add(card); 
 
-        this.setVisible(true);
+        
 
 		JPanel gameArea1 = new JPanel();
 		gameArea1.setOpaque(false);
 		gameArea1.setSize(new Dimension(500, 20));
 		gameArea1.setLayout(new FlowLayout());
-		gameArea1.setBounds(0, 0, 900, 190);
+		gameArea1.setBounds(0, 0, 900, 230);
 		gameArea1.setBorder(BorderFactory.createMatteBorder(7,7,7,7, Color.red));
 		this.add(gameArea1);
+		
 
 		JPanel gameArea2 = new JPanel();
 		gameArea2.setOpaque(false);
 		gameArea2.setSize(new Dimension(500, 20));
 		gameArea2.setLayout(new FlowLayout());
-		gameArea2.setBounds(0,190, 900, 160);
+		gameArea2.setBounds(0,230, 900, 160);
 		gameArea2.setBorder(BorderFactory.createMatteBorder(7, 7, 7, 7, Color.green));
 		this.add(gameArea2);
 		
@@ -68,45 +69,43 @@ public class GUI extends JFrame implements ActionListener, MouseListener, MouseM
 		gameArea3.setOpaque(false);
 		gameArea3.setSize(new Dimension(500, 20));
 		gameArea3.setLayout(new FlowLayout());
-		gameArea3.setBounds(0,350, 900, 190);
+		gameArea3.setBounds(0,390, 900, 190);
 		gameArea3.setBorder(BorderFactory.createMatteBorder(7, 7, 7, 7, Color.yellow));
 		this.add(gameArea3);
 
+		Stack<Card> exampleCards = new Stack<>();
+		exampleCards.push(new Card(4, Card.Suit.Clubs));
+		exampleCards.push(new Card(7, Card.Suit.Hearts));
+		exampleCards.push(new Card(10, Card.Suit.Spades));
+		exampleCards.push(new Card(2, Card.Suit.Diamonds));
+
+		Stack<Card> secondStack = new Stack<>();
+secondStack.push(new Card(10, Card.Suit.Spades));
+secondStack.push(new Card(2, Card.Suit.Diamonds));
+
+		gameArea1.add(drawPile(exampleCards));
+		gameArea1.add(drawPile(secondStack));
+		this.setVisible(true);
     }
 
    public JLayeredPane drawPile(Stack<Card> stackIn) {
-	   JFrame frame = new JFrame("fdskljjfdsalk");
-	   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	   frame.setSize(400,400);
-	   JLayeredPane result = new JLayeredPane();
-	   frame.add(result);
+	int cardWidth=100;
+	int cardHeight=145;
+	int verticalOffset=25;
+	JLayeredPane pile = new JLayeredPane();
+    pile.setLayout(null);
+
+    int count = stackIn.size();
+    pile.setPreferredSize(new Dimension(cardWidth, count == 0 ? cardHeight : cardHeight + (count - 1) * verticalOffset));
 	   Object cards[];
 	    cards = stackIn.toArray(); //please note we convert this stack to an array so that we can iterate through it backwards while drawing. You’ll need to cast each element inside cards to a <Card> in order to use the methods to adjust their position
 		for(int i=0; i<cards.length; i++) {
-			frame.add((Card)cards[i]);
+			Card card = stackIn.get(i);
+        card.setBounds(0, i * verticalOffset, cardWidth, cardHeight);
+        pile.add(card, Integer.valueOf(i));
 		}
-		 JPanel panel1 = createColoredPanel(Color.RED, 100, 100, 200, 200);
-	        JPanel panel2 = createColoredPanel(Color.GREEN, 150, 150, 200, 200);
-	        JPanel panel3 = createColoredPanel(Color.BLUE, 200, 200, 200, 200);
-
-	        // Add the panels to the layered pane with different layer values.
-	        // The layers determine the stacking order of the panels.
-	        frame.add(panel1, JLayeredPane.DEFAULT_LAYER);
-	        frame.add(panel2, JLayeredPane.PALETTE_LAYER);
-	        frame.add(panel3, JLayeredPane.MODAL_LAYER);
-
-		frame.setVisible(true);
-	    return result;
-
+		return pile;
 	}
-
-	private JPanel createColoredPanel(Color color, int x, int y, int width, int height) {
-		// Create a colored JPanel with specified color and position.
-        JPanel panel = new JPanel();
-        panel.setBackground(color);
-        panel.setBounds(x, y, width, height);
-        return panel;
-}
 
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
